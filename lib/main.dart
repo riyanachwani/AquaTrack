@@ -27,7 +27,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-
 class ThemeModel extends ChangeNotifier {
   ThemeMode _mode = ThemeMode.light;
   ThemeMode get mode => _mode;
@@ -36,18 +35,17 @@ class ThemeModel extends ChangeNotifier {
     _loadTheme();
   }
 
-  _loadTheme() async {
+  Future<void> _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
     final isDarkMode = prefs.getBool('isDarkMode') ?? false;
     _mode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 
-  // Toggle theme and save the new preference
   void toggleTheme() async {
     _mode = _mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isDarkMode', _mode == ThemeMode.dark);
+    await prefs.setBool('isDarkMode', _mode == ThemeMode.dark);
     notifyListeners();
   }
 }
@@ -63,7 +61,8 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             theme: MyTheme.lightTheme(context), // Use custom light theme
             darkTheme: MyTheme.darkTheme(context), // Use custom dark theme
-            themeMode: themeModel.mode,
+
+            themeMode: Provider.of<ThemeModel>(context).mode,
             debugShowCheckedModeBanner: false,
             initialRoute: MyRoutes.splashRoute,
             routes: {

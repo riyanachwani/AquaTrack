@@ -14,5 +14,7 @@ class MyRoutes {
   static String historyRoute = '/history';
   static String currentHydartionRoute = '/currentHydartion';
   static String notificationRoute = '/notification';
+  static String feedbackRoute = '/feedback';
+  static String privacypolicyRoute = '/privacypolicy';
 
 }

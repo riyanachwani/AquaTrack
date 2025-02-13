@@ -5,7 +5,9 @@ import 'package:aquatrack/dashboard/current_hydartion.dart';
 import 'package:aquatrack/dashboard/dashboard.dart';
 import 'package:aquatrack/dashboard/history.dart';
 import 'package:aquatrack/dashboard/home.dart';
+import 'package:aquatrack/dashboard/settings/pages/feedback.dart';
 import 'package:aquatrack/dashboard/settings/pages/notifications.dart';
+import 'package:aquatrack/dashboard/settings/pages/privacy_policy.dart';
 import 'package:aquatrack/dashboard/settings/settings.dart';
 import 'package:aquatrack/firebase_options.dart';
 import 'package:aquatrack/onboarding/landing.dart';
@@ -88,6 +90,8 @@ class MyApp extends StatelessWidget {
               MyRoutes.currentHydartionRoute: (context) =>
                   const CurrentHydrationPage(),
               MyRoutes.notificationRoute: (context) => const NotificationPage(),
+              MyRoutes.feedbackRoute: (context) => const FeedbackPage(),
+              MyRoutes.privacypolicyRoute: (context) => const PrivacyPolicyPage(),
             },
           );
         }));

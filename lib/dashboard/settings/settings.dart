@@ -428,10 +428,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       'Feedback',
                       '',
                       () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const FeedbackPage()),
+                          MyRoutes.feedbackRoute,
                         );
                       },
                       context,
@@ -441,7 +440,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       'Privacy Policy',
                       '',
                       () {
-                        // Add privacy policy functionality here
+                        Navigator.pushNamed(
+                          context,
+                          MyRoutes.privacypolicyRoute,
+                        );
                       },
                       context,
                     ),

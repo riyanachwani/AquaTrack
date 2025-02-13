@@ -1,3 +1,4 @@
+import 'package:aquatrack/dashboard/settings/pages/feedback.dart';
 import 'package:aquatrack/dashboard/settings/utils/share_dialog.dart';
 import 'package:aquatrack/dashboard/settings/utils/update_dialog.dart';
 import 'package:aquatrack/main.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -18,6 +20,14 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final UserService _userService = UserService();
+
+  Future<void> _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('isLoggedIn'); // Remove login status
+
+    // Navigate back to the login screen
+    Navigator.pushReplacementNamed(context, MyRoutes.loginRoute);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +67,12 @@ class _SettingsPageState extends State<SettingsPage> {
 
             // Extract the data using your helper function
             var userData = _userService.getUserDataFromSnapshot(snapshot.data!);
-            int age = userData['Age'] ?? 0;
+            String age = userData['Age'] ?? 0;
             double targetIntake = userData['targetIntake'] ?? 0.0;
             String gender = userData['Gender'] ?? 'Not Set';
             String wakeupTime = userData['Wake-up Time'] ?? 'Not Set';
             String bedtime = userData['Bedtime'] ?? 'Not Set';
-            double weight = userData['Weight'] ?? 0.0;
+            String weight = userData['Weight'] ?? 0.0;
 
             return SingleChildScrollView(
               child: Padding(
@@ -418,7 +428,11 @@ class _SettingsPageState extends State<SettingsPage> {
                       'Feedback',
                       '',
                       () {
-                        // Add feedback functionality here
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FeedbackPage()),
+                        );
                       },
                       context,
                     ),
@@ -436,9 +450,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       'assets/images/logout.png',
                       'Logout',
                       '',
-                      () {
-                        // Add logout functionality here
-                      },
+                      () => _logout(),
                       context,
                     ),
                   ],

@@ -5,7 +5,7 @@ import 'package:aquatrack/dashboard/current_hydartion.dart';
 import 'package:aquatrack/dashboard/dashboard.dart';
 import 'package:aquatrack/dashboard/history.dart';
 import 'package:aquatrack/dashboard/home.dart';
-import 'package:aquatrack/dashboard/settings/notifications.dart';
+import 'package:aquatrack/dashboard/settings/pages/notifications.dart';
 import 'package:aquatrack/dashboard/settings/settings.dart';
 import 'package:aquatrack/firebase_options.dart';
 import 'package:aquatrack/onboarding/landing.dart';

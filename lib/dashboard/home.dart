@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
   int currentIntakePercentage = 0;
   List<Item> waterRecords = [];
 
-
   @override
   void initState() {
     super.initState();

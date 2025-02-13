@@ -44,11 +44,11 @@ class UserService {
       'Name': userData['Name'] ?? 'No Name',
       'Email': userData['Email'] ?? 'No Email',
       'Age': userData['Age'] ?? 0,
-      'Wake-up Time':userData['Wake-up Time']??'Not Set',
+      'Wake-up Time': userData['Wake-up Time'] ?? 'Not Set',
       'Bedtime': userData['Bedtime'] ?? 'No Time',
       'Gender': userData['Gender'] ?? 'Not Specified',
-      'Height': userData['Height']?.toDouble() ?? 0.0,
-      'Weight': userData['Weight']?.toDouble() ?? 0.0,
+      'Height': userData['Height'] ?? 0.0,
+      'Weight': userData['Weight'] ?? 0.0,
       'targetIntake': userData['targetIntake']?.toDouble() ?? 0.0,
       'currentIntake': userData['currentIntake']?.toDouble() ?? 0.0,
       'currentIntakePercentage': userData['currentIntakePercentage'] ?? 0,
@@ -56,64 +56,73 @@ class UserService {
   }
 
   // Updating Gender
-Future<void> updateGender(String userId, String newGender) async {
-  try {
-    await _firestore.collection('users').doc(userId).update({'Gender': newGender});
-  } catch (e) {
-    throw Exception('Failed to update Gender: $e');
+  Future<void> updateGender(String userId, String newGender) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(userId)
+          .update({'Gender': newGender});
+    } catch (e) {
+      throw Exception('Failed to update Gender: $e');
+    }
   }
-}
 
 // Updating Daily Goal
-Future<void> updateDailyGoal(String userId, double newGoal) async {
-  try {
-    await _firestore.collection('users').doc(userId).update({'targetIntake': newGoal});
-  } catch (e) {
-    throw Exception('Failed to update Daily Goal: $e');
+  Future<void> updateDailyGoal(String userId, double newGoal) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(userId)
+          .update({'targetIntake': newGoal});
+    } catch (e) {
+      throw Exception('Failed to update Daily Goal: $e');
+    }
   }
-}
 
 // Updating Wakeup Time
-Future<void> updateWakeupTime(String userId, String wakeupTime) async {
-  try {
-    await _firestore.collection('users').doc(userId).update({'WakeupTime': wakeupTime});
-  } catch (e) {
-    throw Exception('Failed to update Wakeup Time: $e');
+  Future<void> updateWakeupTime(String userId, String wakeupTime) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(userId)
+          .update({'WakeupTime': wakeupTime});
+    } catch (e) {
+      throw Exception('Failed to update Wakeup Time: $e');
+    }
   }
-}
 
 // Updating Bedtime
-Future<void> updateBedtime(String userId, String bedtime) async {
-  try {
-    await _firestore.collection('users').doc(userId).update({'Bedtime': bedtime});
-  } catch (e) {
-    throw Exception('Failed to update Bedtime: $e');
-  }
-}
-// Updating theme in Firebase
-Future<void> updateTheme(String userId, String theme) async {
-  try {
-    await _firestore.collection('users').doc(userId).update({'theme': theme});
-  } catch (e) {
-    throw Exception('Failed to update theme: $e');
-  }
-}
-
-Future<String> getUserTheme(String userId) async {
-  try {
-    DocumentSnapshot userSnapshot =
-        await _firestore.collection('users').doc(userId).get();
-    if (userSnapshot.exists) {
-      return userSnapshot['theme'] ?? 'light'; // Default to 'light'
-    } else {
-      throw Exception('User not found');
+  Future<void> updateBedtime(String userId, String bedtime) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(userId)
+          .update({'Bedtime': bedtime});
+    } catch (e) {
+      throw Exception('Failed to update Bedtime: $e');
     }
-  } catch (e) {
-    throw Exception('Failed to fetch theme: $e');
   }
-}
 
+// Updating theme in Firebase
+  Future<void> updateTheme(String userId, String theme) async {
+    try {
+      await _firestore.collection('users').doc(userId).update({'theme': theme});
+    } catch (e) {
+      throw Exception('Failed to update theme: $e');
+    }
+  }
 
-
-
+  Future<String> getUserTheme(String userId) async {
+    try {
+      DocumentSnapshot userSnapshot =
+          await _firestore.collection('users').doc(userId).get();
+      if (userSnapshot.exists) {
+        return userSnapshot['theme'] ?? 'light'; // Default to 'light'
+      } else {
+        throw Exception('User not found');
+      }
+    } catch (e) {
+      throw Exception('Failed to fetch theme: $e');
+    }
+  }
 }

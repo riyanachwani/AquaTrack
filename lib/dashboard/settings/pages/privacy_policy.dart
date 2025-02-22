@@ -82,6 +82,7 @@ class PrivacyPolicyPage extends StatelessWidget {
               "7. Contact Us",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            
             const SizedBox(height: 5),
             const Text(
               "If you have any questions about this Privacy Policy, please contact us at support@aquatrack.com.",
